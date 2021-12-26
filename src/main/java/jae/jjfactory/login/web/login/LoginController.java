@@ -26,23 +26,36 @@ public class LoginController {
         return "/login/loginForm";
     }
 
-    @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response){
-        if (bindingResult.hasErrors()){
-            return "/login/loginForm";
-        }
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+//    @PostMapping("/login")
+//    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response){
+//        if (bindingResult.hasErrors()){
+//            return "/login/loginForm";
+//        }
+//        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+//
+//        if(loginMember == null){
+//            bindingResult.reject("login failed","아이디 또는 비밀번호가 일치하지 않습니다");
+//            return "/login/loginForm";
+//        }
+//
+//        // 로그인 성공
+//
+//        //쿠키에 시간정보 안주면 세션쿠키. 주면 영속쿠키
+//        Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+//        response.addCookie(idCookie);
+//
+//        return "redirect:/";
+//    }
 
-        if(loginMember == null){
-            bindingResult.reject("login failed","아이디 또는 비밀번호가 일치하지 않습니다");
-            return "/login/loginForm";
-        }
+//    @PostMapping("/logout")
+//    public String logout(HttpServletResponse response){
+//        expireCookie(response,"memberId");
+//        return "redirect:/";
+//    }
 
-        // 로그인 성공
-
-        Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
-        response.addCookie(idCookie);
-
-        return "redirect:/";
+    private void expireCookie(HttpServletResponse response, String cookieName) {
+        Cookie cookie = new Cookie(cookieName, null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 }

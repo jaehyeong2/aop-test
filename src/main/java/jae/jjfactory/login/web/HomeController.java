@@ -73,7 +73,7 @@ public class HomeController {
         return "loginHome";
     }
 
-    @GetMapping("/")
+//    @GetMapping("/")
     public String homeLoginV4(
             @SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false)Member member, Model model){
         //로그인

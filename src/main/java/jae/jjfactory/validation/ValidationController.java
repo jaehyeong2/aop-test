@@ -22,6 +22,7 @@ import java.util.Map;
 public class ValidationController {
 
     private final ItemRepositoryV2 itemRepositoryV2;
+    private final ItemValidator itemValidator;
 
     @GetMapping
     public String items(Model model){
@@ -163,7 +164,7 @@ public class ValidationController {
         return "redirect:/validation/v2/items";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV4(@ModelAttribute Item item, BindingResult bindingResult,
                             RedirectAttributes redirectAttributes, Model model) {
 
@@ -185,6 +186,25 @@ public class ValidationController {
                 bindingResult.reject("totalPriceMin");
             }
         }
+        //검증에 실패하면 다시 입력 폼으로
+        if (bindingResult.hasErrors()) {
+            log.info("errors= {}",bindingResult);
+//            model.addAttribute("errors", bindingResult);
+            return "validation/v2/addForm";
+        }
+        //성공 로직
+        Item savedItem = itemRepositoryV2.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/validation/v2/items";
+    }
+
+    @PostMapping("/add")
+    public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes, Model model) {
+
+        itemValidator.validate(item,bindingResult);
+
         //검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             log.info("errors= {}",bindingResult);

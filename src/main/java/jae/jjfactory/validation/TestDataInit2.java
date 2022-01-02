@@ -1,4 +1,6 @@
 package jae.jjfactory.validation;
+import jae.jjfactory.validation.item.Item;
+import jae.jjfactory.validation.item.ItemRepositoryV2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

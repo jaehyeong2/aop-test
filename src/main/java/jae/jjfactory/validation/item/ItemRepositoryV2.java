@@ -1,4 +1,4 @@
-package jae.jjfactory.validation;
+package jae.jjfactory.validation.item;
 
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +27,7 @@ public class ItemRepositoryV2 {
         return new ArrayList<>(store.values());
     }
 
-    public void update(Long itemId, jae.jjfactory.login.domain.item.Item updateParam) {
+    public void update(Long itemId, Item updateParam) {
         Item findItem = findById(itemId);
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());

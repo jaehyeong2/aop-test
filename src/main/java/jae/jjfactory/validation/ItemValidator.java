@@ -1,9 +1,9 @@
 package jae.jjfactory.validation;
 
+import jae.jjfactory.validation.item.Item;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 
 @Component

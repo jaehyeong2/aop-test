@@ -1,0 +1,20 @@
+#logging.level.org.apache.coyote.http11=debug
+spring:
+  messages:
+    basename: messages,errors
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/jwt_test?serverTimezone=Asia/Seoul
+    username: jae
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    open-in-view: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
